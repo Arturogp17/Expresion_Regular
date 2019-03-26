@@ -1,0 +1,90 @@
+Alumno: Arturo García Perez
+Fecha: 16Enero2019
+Avance:
+	Gramática:	Revisión de tipo gerarquía de Chomsky
+-----------------------
+Rev.	OK
+	Continuar con grámatica ER, ajustar este proyecto.
+--------------------------------------------------------------
+22 de enero de 2019
+Avance:
+	Programa de expresion regular, los 4 pasos completados
+----------
+Rev.
+	-Hay que sustituir primero los {} por el operador *
+	-Despues buscar los operadores +, ? 
+
+	ER = a{a}ab{cb}c
+
+	ER = a+ab(cb)c
+-------------------------------------------------------------------------------
+30 de enero de 2019
+Avance:
+	-Se muestra la gramatica completa, si se reduce o sustituye
+	-Al simplificar, se sustituye primero los {} por el operador *
+		ER = a{a}ab{cb}c
+		ER = aa*ab(cb)*c
+		ER = a+ab(cb)*c
+	-Se agrega funcionalidad para el caso en el que solo hay una gramatica
+		A->aA
+	-Al sustituir o reducir en casos parecidos al siguiente, realiza la multiplicación de los factores
+		A->aB|a{a|b}aA|cB
+		Xi = A	 alfa = {a{a|b}a}	Psi = (aB|cB)
+		A->{a{a|b}a}(aB|cB)
+		A->{a{a|b}a}aB|{a{a|b}a}cB
+----------------------------------------------------------------------------------------------------------------
+Rev.
+	-Hay que agregar las barras ToolStrip(Necesarias) y MenuStrip 
+	-Considero que esta bien por las ER largas pero cuando se implemente la vericación lo sabremos.
+Continuar con la sustitución de operadores.
+-----------------------------------------------------
+-----------------------------------------------------
+12 de febrero de 2019
+Avance:
+	-Se agrega el menu ToolStrip.
+	-Se modifica el menuStrip, moviendo el "Abrir" y "Guardar" a una sola pestaña llamada "Archivo".
+	-Se agrega el · en la expresion regular.
+	-Se arreglan errores al generar la expresión.
+---------------------------------------------------------------------------------------------------------------
+Rev.
+	-Hacer la Posfija de ER.
+	-Iniciar con la Verificación de la ER. Hacer 5 oraciones de cada gramática a evaluar y agregarla a un ComboBox Ctrl.
+-------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------
+25 de febrero de 2019
+Avance:
+	-Se arregla error al generar el operador + de la forma:
+		a*aa* antes generaba a+a+			OK
+	-Se genera la expresion Postfija			OK
+--------------------------------------------
+Rev.
+	Verificar la gramatica Perra.
+--------------------------------------------
+7 de marzo de 2019
+Avance:
+	-Se agrega la funciond de crear y dibujar el arbol floreado con:
+		->primera pos
+		->ultima pos
+		->anulable
+--------------------------------------------
+Rev.
+	-OK
+	-Tratar de hacel el Zoom y en lo posible mover Nodo y Grafo.
+	-Al Redimensionar la ventana dimensionar los tab.
+-------------------------------------------------------------------------------------
+11 de marzo de 2019
+Avance:
+	-Tabla de primeraPos, ultimaPos y anulable				OK
+	-Tabla de siguiente pos							OK
+	-Mover nodo								OK
+	-Mover Arbol								OK
+	-El tab ya es resposivo al cambio de tamaño de la ventana		OK
+-----------------------------------------------------------------
+Rev.
+	Continuar con el Autómata Deterministico.
+-------------------
+
+	
+
+
+ 

@@ -1,0 +1,21 @@
+C:\Users\artur\OneDrive\Documentos\UASLP\Compiladores A\ExpresionRegular\ExpresionRegular\bin\Debug\ExpresionRegular.exe.config
+C:\Users\artur\OneDrive\Documentos\UASLP\Compiladores A\ExpresionRegular\ExpresionRegular\bin\Debug\ExpresionRegular.exe
+C:\Users\artur\OneDrive\Documentos\UASLP\Compiladores A\ExpresionRegular\ExpresionRegular\bin\Debug\ExpresionRegular.pdb
+C:\Users\artur\OneDrive\Documentos\UASLP\Compiladores A\ExpresionRegular\ExpresionRegular\obj\Debug\ExpresionRegular.csprojAssemblyReference.cache
+C:\Users\artur\OneDrive\Documentos\UASLP\Compiladores A\ExpresionRegular\ExpresionRegular\obj\Debug\ExpresionRegular.Form1.resources
+C:\Users\artur\OneDrive\Documentos\UASLP\Compiladores A\ExpresionRegular\ExpresionRegular\obj\Debug\ExpresionRegular.Properties.Resources.resources
+C:\Users\artur\OneDrive\Documentos\UASLP\Compiladores A\ExpresionRegular\ExpresionRegular\obj\Debug\ExpresionRegular.csproj.GenerateResource.cache
+C:\Users\artur\OneDrive\Documentos\UASLP\Compiladores A\ExpresionRegular\ExpresionRegular\obj\Debug\ExpresionRegular.csproj.CoreCompileInputs.cache
+C:\Users\artur\OneDrive\Documentos\UASLP\Compiladores A\ExpresionRegular\ExpresionRegular\obj\Debug\ExpresionRegular.exe
+C:\Users\artur\OneDrive\Documentos\UASLP\Compiladores A\ExpresionRegular\ExpresionRegular\obj\Debug\ExpresionRegular.pdb
+C:\Users\artur\OneDrive\Documentos\UASLP\Sem 2018-2019-II\Compiladores A\ExpresionRegular\ExpresionRegular\bin\Debug\ExpresionRegular.exe.config
+C:\Users\artur\OneDrive\Documentos\UASLP\Sem 2018-2019-II\Compiladores A\ExpresionRegular\ExpresionRegular\bin\Debug\ExpresionRegular.exe
+C:\Users\artur\OneDrive\Documentos\UASLP\Sem 2018-2019-II\Compiladores A\ExpresionRegular\ExpresionRegular\bin\Debug\ExpresionRegular.pdb
+C:\Users\artur\OneDrive\Documentos\UASLP\Sem 2018-2019-II\Compiladores A\ExpresionRegular\ExpresionRegular\obj\Debug\ExpresionRegular.Form1.resources
+C:\Users\artur\OneDrive\Documentos\UASLP\Sem 2018-2019-II\Compiladores A\ExpresionRegular\ExpresionRegular\obj\Debug\ExpresionRegular.Properties.Resources.resources
+C:\Users\artur\OneDrive\Documentos\UASLP\Sem 2018-2019-II\Compiladores A\ExpresionRegular\ExpresionRegular\obj\Debug\ExpresionRegular.csproj.GenerateResource.cache
+C:\Users\artur\OneDrive\Documentos\UASLP\Sem 2018-2019-II\Compiladores A\ExpresionRegular\ExpresionRegular\obj\Debug\ExpresionRegular.csproj.CoreCompileInputs.cache
+C:\Users\artur\OneDrive\Documentos\UASLP\Sem 2018-2019-II\Compiladores A\ExpresionRegular\ExpresionRegular\obj\Debug\ExpresionRegular.exe
+C:\Users\artur\OneDrive\Documentos\UASLP\Sem 2018-2019-II\Compiladores A\ExpresionRegular\ExpresionRegular\obj\Debug\ExpresionRegular.pdb
+C:\Users\artur\OneDrive\Documentos\UASLP\Sem 2018-2019-II\Compiladores A\ExpresionRegular\ExpresionRegular\obj\Debug\ExpresionRegular.csprojAssemblyReference.cache
+C:\Users\artur\OneDrive\Documentos\UASLP\Sem 2018-2019-II\Compiladores A\ExpresionRegular\ExpresionRegular\obj\Debug\ExpresionRegular.Arbol_F.resources
