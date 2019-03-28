@@ -1,0 +1,8 @@
+A->aA
+A->bA
+A->aB
+B->aA
+B->bA
+B->cA
+A->cA
+A->d

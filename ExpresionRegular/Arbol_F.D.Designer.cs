@@ -57,7 +57,7 @@
             this.Verificar = new System.Windows.Forms.Label();
             this.TextVer = new System.Windows.Forms.TextBox();
             this.Validar = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
+            this.VerRes = new System.Windows.Forms.Label();
             this.ER_Post = new System.Windows.Forms.TextBox();
             this.ExpReg = new System.Windows.Forms.TextBox();
             this.Simulacion = new System.Windows.Forms.Timer(this.components);
@@ -364,13 +364,13 @@
             this.Validar.UseVisualStyleBackColor = true;
             this.Validar.Click += new System.EventHandler(this.Validar_Click);
             // 
-            // label6
+            // VerRes
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(460, 136);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(0, 13);
-            this.label6.TabIndex = 11;
+            this.VerRes.AutoSize = true;
+            this.VerRes.Location = new System.Drawing.Point(460, 136);
+            this.VerRes.Name = "VerRes";
+            this.VerRes.Size = new System.Drawing.Size(0, 13);
+            this.VerRes.TabIndex = 11;
             // 
             // ER_Post
             // 
@@ -399,7 +399,7 @@
             this.ClientSize = new System.Drawing.Size(1257, 561);
             this.Controls.Add(this.ExpReg);
             this.Controls.Add(this.ER_Post);
-            this.Controls.Add(this.label6);
+            this.Controls.Add(this.VerRes);
             this.Controls.Add(this.Validar);
             this.Controls.Add(this.TextVer);
             this.Controls.Add(this.Verificar);
@@ -444,7 +444,7 @@
         private System.Windows.Forms.Label Verificar;
         private System.Windows.Forms.TextBox TextVer;
         private System.Windows.Forms.Button Validar;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label VerRes;
         private System.Windows.Forms.TextBox ER_Post;
         private System.Windows.Forms.TextBox ExpReg;
         private System.Windows.Forms.PictureBox pictureAutomata;

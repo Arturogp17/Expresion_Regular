@@ -15,7 +15,7 @@ namespace ExpresionRegular
         private Point[] arrptos;
         private Pen pn;
         AdjustableArrowCap arrow;
-        bool ida;
+        bool ida, abajo;
         string nom;
         int curva = 15;
 
@@ -24,8 +24,9 @@ namespace ExpresionRegular
         /// </summary>
         /// <param name="pt1">Punto inicial del SpLine</param>
         /// <param name="pt2">Punto final del SpLine</param>
-        public Bezier(Point pt1, Point pt2, Graphics g, Pen p, bool bandDireccion, string nombreArista)
+        public Bezier(Point pt1, Point pt2, Graphics g, Pen p, bool bandDireccion, string nombreArista, bool ab)
         {
+            abajo = ab;
             arrow = new AdjustableArrowCap(5, 5);
             ida = bandDireccion;
             nom = nombreArista;
@@ -35,7 +36,7 @@ namespace ExpresionRegular
             p2 = new Point();
             p3 = new Point();
             
-            numPtos = 50;
+            numPtos = 35;
             arrptos = new Point[numPtos];
             for (int i = 0; i < numPtos; i++)
                 arrptos[i] = new Point();
@@ -60,12 +61,20 @@ namespace ExpresionRegular
             distancia = Math.Sqrt(Math.Pow(((p4.X - p1.X) / 5), 2) + Math.Pow(((p4.Y - p1.Y) / 5), 2));
             //Punto 2
             p2.X = p1.X + ((p4.X - p1.X) / 3);
-            p2.Y = p1.Y + ((p4.Y - p1.Y) / 3) - curva;
+            if(!abajo)
+                p2.Y = p1.Y + ((p4.Y - p1.Y) / 3) - curva;
+            else
+                p2.Y = p1.Y + ((p4.Y - p1.Y) / 3) + curva;
+
             x2 = (float)(p2.X - (distancia * Math.Cos(grados)));
             y2 = (float)(p2.Y - (distancia * Math.Sin(grados)));
             //Punto 3
             p3.X = p4.X - ((p4.X - p1.X) / 3);
-            p3.Y = p4.Y - ((p4.Y - p1.Y) / 3) - curva;
+            if(!abajo)
+                p3.Y = p4.Y - ((p4.Y - p1.Y) / 3) - curva;
+            else
+                p3.Y = p4.Y - ((p4.Y - p1.Y) / 3) + curva;
+
             x3 = (float)(p3.X - (distancia * Math.Cos(grados)));
             y3 = (float)(p3.Y - (distancia * Math.Sin(grados)));
 

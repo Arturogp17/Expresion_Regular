@@ -28,8 +28,8 @@ namespace ExpresionRegular
         int contZoomAut= 10, contZoom = 10;
         int w, h;
         List<Point> respaldo, respaldoAut;
-        Arbol automata;
-        int autYpos = 100;
+        Arbol automata, autVerificacion;
+        int autYpos = 50;
         List<int> estado = new List<int>();
         AdjustableArrowCap arrow;
 
@@ -79,7 +79,10 @@ namespace ExpresionRegular
             GeneraAutomata();
             SetNiveles(automata[0], 0);
             foreach (Nodo n in automata)
+            {
                 n.visitado = false;
+                n.centro = new Point(0, 0);
+            }
             GeneraPosicionesAutomata(automata[0]);
             SizeBmp(ref w, ref h, automata);
             bmpA = new Bitmap(w, h);
@@ -153,6 +156,7 @@ namespace ExpresionRegular
             g.DrawImage(bmp, 0, 0);
             pictureArbol.Image = bmp;
         }
+
 
         private void pictureArbol_MouseDown(object sender, MouseEventArgs e)
         {
@@ -449,41 +453,53 @@ namespace ExpresionRegular
         private void GeneraPosicionesAutomata(Nodo n)
         {
             n.visitado = true;
-            if (n.aristas.Count > 0 && n.nivel != nivelMayor())
+            if (n.aristas.Count > 0)
             {
-                foreach (Arista a in n.aristas)
+                if (AristaNoVisitadas(n))
                 {
-                    if (!a.destino.visitado)
-                        GeneraPosicionesAutomata(a.destino);
+                    foreach (Arista a in n.aristas)
+                    {
+                        if (!a.destino.visitado)
+                            GeneraPosicionesAutomata(a.destino);
+                    }
+                    n.centro = PosicionPadre(n);
                 }
-                n.centro = PosicionPadre(n.aristas);
-                n.centro.X = n.nivel * 135 + 50;
+                else
+                {
+                    if(n.aristas[0].destino.centro.X != 0)
+                    {
+                        n.centro = PosicionPadre(n);
+                    }
+                    else
+                    {
+                        n.centro.X = n.nivel * 130 + 50;
+                        n.centro.Y = autYpos;
+                        autYpos += 80;
+                    }
+                }
             }
             else
             {
-                n.centro.X = n.nivel * 135 + 50;
+                n.centro.X = n.nivel * 130 + 50;
                 n.centro.Y = autYpos;
-                autYpos += 135;
+                autYpos += 80;
             }
         }
 
-        private Point PosicionPadre(List<Arista> a)
+        private Point PosicionPadre(Nodo n)
         {
-            int cont = 0;
-            Point res = new Point();
-            foreach(Arista n in a)
+            Point p;
+            int y = 0, cont = 0;
+            foreach(Arista a in n.aristas)
             {
-                if (n.destino.centro.Y != 0)
+                if (a.destino.name != n.name && n.nivel + 1 == a.destino.nivel)
                 {
-                    res.Y += n.destino.centro.Y;
+                    y += a.destino.centro.Y;
                     cont++;
                 }
             }
-
-            res.X = 0;
-            if(cont != 0)
-                res.Y /= cont;
-            return res;
+            p = new Point(n.nivel * 130 + 50, y / cont);
+            return p;
         }
 
         private bool AristaNoVisitadas(Nodo n)
@@ -502,7 +518,7 @@ namespace ExpresionRegular
             n.visitado = true;
             foreach(Arista a in n.aristas)
             {
-                if(!a.destino.visitado)
+                if(!a.destino.visitado && n.name[0] < a.destino.name[0])
                     SetNiveles(a.destino, nivel + 1);
             }
         }
@@ -540,8 +556,9 @@ namespace ExpresionRegular
                 gA.DrawEllipse(Pen, n.centro.X - n.radio, n.centro.Y - n.radio, n.radio * 2, n.radio * 2);
                 if (n.terminal)
                     gA.DrawEllipse(Pen, n.centro.X - n.radio + 3, n.centro.Y - n.radio + 3, n.radio * 2 - 6, n.radio * 2 - 6);
-
                 gA.DrawString(n.name, font, brushFont, n.centro.X - (n.radio / 2), n.centro.Y - (n.radio / 2 + 1));
+
+
                 foreach (Arista a in n.aristas)
                 {
                     if (a.destino.Equals(n))
@@ -551,7 +568,7 @@ namespace ExpresionRegular
                     }
                     else
                     {
-                        if (n.name[0] + 1 == a.destino.name[0])
+                        if (n.nivel + 1 == a.destino.nivel)
                         {
                             gA.DrawLine(PenA, BuscaInterseccion(n.centro, a.destino.centro, n.radio), BuscaInterseccion(a.destino.centro, n.centro, n.radio));
                             gA.DrawString(a.nombre, fontA, brushArista, (n.centro.X + a.destino.centro.X) / 2 - 8, (n.centro.Y + a.destino.centro.Y) / 2 - 15);
@@ -559,9 +576,9 @@ namespace ExpresionRegular
                         else
                         {
                             if (n.name[0] > a.destino.name[0])
-                                bz = new Bezier(BuscaInterseccion(a.destino.centro, n.centro, n.radio), BuscaInterseccion(n.centro, a.destino.centro, n.radio), gA, PenA, false, a.nombre);
+                                bz = new Bezier(BuscaInterseccion(a.destino.centro, n.centro, n.radio), BuscaInterseccion(n.centro, a.destino.centro, n.radio), gA, PenA, false, a.nombre, false);
                             else
-                                bz = new Bezier(BuscaInterseccion(a.destino.centro, n.centro, n.radio), BuscaInterseccion(n.centro, a.destino.centro, n.radio), gA, PenA, true, a.nombre);
+                                bz = new Bezier(BuscaInterseccion(a.destino.centro, n.centro, n.radio), BuscaInterseccion(n.centro, a.destino.centro, n.radio), gA, PenA, false, a.nombre, true);
                         }
 
                     }
@@ -601,11 +618,51 @@ namespace ExpresionRegular
 
         private void Validar_Click(object sender, EventArgs e)
         {
+            autVerificacion = new Arbol();
+            Arista ar = new Arista();
+            Nodo EdoActual = new Nodo();
+            Nodo nod = new Nodo();
+            bool bandV = true;
+            EdoActual = automata[0];
+            nod = new Nodo(EdoActual.name);
+            nod.centro = EdoActual.centro;
+            autVerificacion.Add(nod);
             string w = "";
             w = TextVer.Text;
+            int contW = 0;
             if(w.Length > 0)
             {
-
+                while(contW < w.Length && bandV)
+                {
+                    bandV = false;
+                    foreach(Arista a in EdoActual.aristas)
+                    {
+                        if (a.nombre[0] == w[contW])
+                        { 
+                            EdoActual = a.destino;
+                            nod = new Nodo(EdoActual.name);
+                            nod.centro = EdoActual.centro;
+                            ar = new Arista();
+                            ar.nombre = a.nombre;
+                            ar.destino = nod;
+                            automata.Last().aristas.Add(ar);
+                            autVerificacion.Add(nod);
+                            contW++;
+                            bandV = true;
+                            break;
+                        }
+                    }
+                }
+                if(contW == w.Length && EdoActual.terminal)
+                {
+                    VerRes.Text = "Aceptada";
+                    VerRes.BackColor = Color.Green;
+                }
+                else
+                {
+                    VerRes.Text = "Error";
+                    VerRes.BackColor = Color.Red;
+                }
             }
         }
 
