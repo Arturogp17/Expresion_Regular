@@ -61,6 +61,8 @@
             this.ER_Post = new System.Windows.Forms.TextBox();
             this.ExpReg = new System.Windows.Forms.TextBox();
             this.Simulacion = new System.Windows.Forms.Timer(this.components);
+            this.Simular = new System.Windows.Forms.Button();
+            this.Timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureArbol)).BeginInit();
             this.tabArbol.SuspendLayout();
             this.tabArbolFloreado.SuspendLayout();
@@ -356,7 +358,7 @@
             // 
             // Validar
             // 
-            this.Validar.Location = new System.Drawing.Point(377, 131);
+            this.Validar.Location = new System.Drawing.Point(385, 113);
             this.Validar.Name = "Validar";
             this.Validar.Size = new System.Drawing.Size(75, 23);
             this.Validar.TabIndex = 10;
@@ -367,7 +369,7 @@
             // VerRes
             // 
             this.VerRes.AutoSize = true;
-            this.VerRes.Location = new System.Drawing.Point(460, 136);
+            this.VerRes.Location = new System.Drawing.Point(390, 141);
             this.VerRes.Name = "VerRes";
             this.VerRes.Size = new System.Drawing.Size(0, 13);
             this.VerRes.TabIndex = 11;
@@ -392,11 +394,28 @@
             // 
             this.Simulacion.Tick += new System.EventHandler(this.Simulacion_Tick);
             // 
+            // Simular
+            // 
+            this.Simular.Enabled = false;
+            this.Simular.Location = new System.Drawing.Point(385, 157);
+            this.Simular.Name = "Simular";
+            this.Simular.Size = new System.Drawing.Size(75, 23);
+            this.Simular.TabIndex = 14;
+            this.Simular.Text = "Simular";
+            this.Simular.UseVisualStyleBackColor = true;
+            this.Simular.Visible = false;
+            this.Simular.Click += new System.EventHandler(this.Simular_Click);
+            // 
+            // Timer1
+            // 
+            this.Timer1.Tick += new System.EventHandler(this.Timer1_Tick);
+            // 
             // Arbol_F
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1257, 561);
+            this.Controls.Add(this.Simular);
             this.Controls.Add(this.ExpReg);
             this.Controls.Add(this.ER_Post);
             this.Controls.Add(this.VerRes);
@@ -453,7 +472,6 @@
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton mueveNodo;
         private System.Windows.Forms.ToolStripButton mueveArbol;
-        private System.Windows.Forms.Timer Simulacion;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
@@ -463,5 +481,8 @@
         private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.ToolStripButton mueveNodoAut;
         private System.Windows.Forms.ToolStripButton mueveAut;
+        private System.Windows.Forms.Button Simular;
+        public System.Windows.Forms.Timer Simulacion;
+        private System.Windows.Forms.Timer Timer1;
     }
 }

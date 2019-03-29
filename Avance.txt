@@ -83,8 +83,29 @@ Avance:
 Rev.
 	Continuar con el Autómata Deterministico.
 -------------------
+19 de marzo de 2019
+Avance:
+	-Se genera el automata AFD
+	-Se minimiza el automata
+------------
+Rev.
+	Mejorar el autómata.
+	Verificar la oración.
+-------------------
+29 de marzo de 2019
+Avance:
+	Dibujar el automata mejorado
+	Se Verifica la oración
+	Se simula la verificación de la oración
 
 	
+
+
+
+
+
+
+
 
 
  

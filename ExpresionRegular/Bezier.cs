@@ -24,7 +24,7 @@ namespace ExpresionRegular
         /// </summary>
         /// <param name="pt1">Punto inicial del SpLine</param>
         /// <param name="pt2">Punto final del SpLine</param>
-        public Bezier(Point pt1, Point pt2, Graphics g, Pen p, bool bandDireccion, string nombreArista, bool ab)
+        public Bezier(Point pt1, Point pt2, Graphics g, Pen p, bool bandDireccion, string nombreArista, bool ab, bool dibuja)
         {
             abajo = ab;
             arrow = new AdjustableArrowCap(5, 5);
@@ -41,7 +41,8 @@ namespace ExpresionRegular
             for (int i = 0; i < numPtos; i++)
                 arrptos[i] = new Point();
             Crea_Puntos();
-            PintaCurva(g);
+            if(dibuja)
+                PintaCurva(g);
         }
         /// <summary>
         /// Crea los puntos de control en los que se basara para crear el SpLine, dandoles 
