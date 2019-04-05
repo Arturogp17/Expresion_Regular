@@ -19,3 +19,4 @@ C:\Users\artur\OneDrive\Documentos\UASLP\Sem 2018-2019-II\Compiladores A\Expresi
 C:\Users\artur\OneDrive\Documentos\UASLP\Sem 2018-2019-II\Compiladores A\ExpresionRegular\ExpresionRegular\obj\Debug\ExpresionRegular.pdb
 C:\Users\artur\OneDrive\Documentos\UASLP\Sem 2018-2019-II\Compiladores A\ExpresionRegular\ExpresionRegular\obj\Debug\ExpresionRegular.csprojAssemblyReference.cache
 C:\Users\artur\OneDrive\Documentos\UASLP\Sem 2018-2019-II\Compiladores A\ExpresionRegular\ExpresionRegular\obj\Debug\ExpresionRegular.Arbol_F.resources
+C:\Users\artur\OneDrive\Documentos\UASLP\Sem 2018-2019-II\Compiladores A\ExpresionRegular\ExpresionRegular\obj\Debug\ExpresionRegular.SLR0.resources

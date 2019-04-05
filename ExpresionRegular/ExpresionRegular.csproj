@@ -63,8 +63,15 @@
     </Compile>
     <Compile Include="Arbol.cs" />
     <Compile Include="Nodo.cs" />
+    <Compile Include="NodoSLR.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SLR0.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SLR0.Designer.cs">
+      <DependentUpon>SLR0.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Arbol_F.D.resx">
       <DependentUpon>Arbol_F.D.cs</DependentUpon>
     </EmbeddedResource>
@@ -81,6 +88,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="SLR0.resx">
+      <DependentUpon>SLR0.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

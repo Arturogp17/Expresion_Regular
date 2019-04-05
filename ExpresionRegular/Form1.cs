@@ -81,8 +81,7 @@ namespace ExpresionRegular
             paso4.Clear();
             ER_Postfija.Text = "";
 
-            if (!Regular)
-                VerificaRegular();
+            VerificaRegular();
 
             if (Regular && gramatica.Lines.Count() > 0)
             {
@@ -91,6 +90,15 @@ namespace ExpresionRegular
                 Paso2();
                 Paso3();
                 Paso4();
+                Regular = false;
+            }
+            else
+            {
+                if(gramatica.Lines.Count() != 0)
+                {
+                    SLR0 slr = new SLR0(gramatica.Lines.ToList());
+                    slr.ShowDialog();
+                }
             }
             Generar_Posfija.Enabled = true;
         }
@@ -646,7 +654,7 @@ namespace ExpresionRegular
                     Generar_Posfija.Enabled = false;
                     break;
 
-                case "Guardar":
+                case "Save":
                     saveFileDialog1.InitialDirectory = directorio;
                     saveFileDialog1.FileName = "";
                     saveFileDialog1.Filter = "(*.txt)|*.txt";
@@ -783,43 +791,7 @@ namespace ExpresionRegular
             ArbolFD.ShowDialog();
             ArbolFD.Dispose();
         }
-
-        private void Form1_Resize(object sender, EventArgs e)
-        {
-            /*if (ClientSize.Width < 1250 || ClientSize.Height < 582)
-            {
-                Size p = ClientSize;
-                if (ClientSize.Width < 1250)
-                    p.Width = 1250;
-                if (ClientSize.Height < 582)
-                    p.Height = 582;
-                ClientSize = p;
-            }
-            double w, h;
-            w = ClientSize.Width * (112.0 / 1250.0);
-            h = ClientSize.Height * (161.0 / 428.0);
-            gramatica.Size = new Size((int)w, (int)h);
-            Paso1Label.Location = new Point(12, 84 + gramatica.Size.Height);
-            paso1.Location = new Point(12, 84 + gramatica.Size.Height + 20);
-            paso1.Size = gramatica.Size;
-
-            Paso2Label.Location = new Point(12 + gramatica.Size.Width + 6, 63);
-            paso2.Location = new Point(Paso2Label.Location.X, 84);
-            w = ClientSize.Width * (354.0 / 1250.0);
-            h = ClientSize.Height * (344.0 / 428.0);
-            paso2.Size = new Size((int)w, (int)h);
-
-            Paso3Label.Location = new Point(paso2.Location.X + paso2.Size.Width + 6, 63);
-            paso3.Location = new Point(Paso3Label.Location.X, 83);
-            w = ClientSize.Width * (414.0 / 1250.0);
-            paso3.Size = new Size((int)w, paso2.Size.Height);
-
-            Paso4Label.Location = new Point(paso3.Location.X + paso3.Size.Width + 6, 63);
-            paso4.Location = new Point(Paso4Label.Location.X, 83);
-            paso4.Size = new Size(ClientSize.Width - paso4.Location.X - 12, paso3.Size.Height);
-            */
-        }
-
+        
         private void ExpresionR_TextChanged(object sender, EventArgs e)
         {
             if (ExpresionR.Text != "")

@@ -97,6 +97,13 @@ Avance:
 	Dibujar el automata mejorado
 	Se Verifica la oración
 	Se simula la verificación de la oración
+----------------------------------------------
+Rev.
+	Arreglar zoom, limpiar variables y controles.
+	**********************************************
+	Hacer el Examen: Primero y Siguiente.
+	**********************************************
+--------------
 
 	
 
