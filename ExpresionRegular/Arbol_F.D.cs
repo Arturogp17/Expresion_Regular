@@ -61,11 +61,12 @@ namespace ExpresionRegular
             fontpos = new Font("Arial", 10, FontStyle.Bold);
             Pen = new Pen(Color.Black, 2);
             penV = new Pen(Color.Purple, 3);
-            penVF = new Pen(Color.Red, 3);
+            penVF = new Pen(Color.DeepSkyBlue, 3);
             PenA = new Pen(Color.Black, 2);
             arrow = new AdjustableArrowCap(5, 5);
             PenA.CustomEndCap = arrow;
             penV.CustomEndCap = arrow;
+            penVF.CustomEndCap = arrow;
             brush = new SolidBrush(Color.White);
             brushFont = new SolidBrush(Color.Black);
             brushAnulable = new SolidBrush(Color.Red);
@@ -89,7 +90,6 @@ namespace ExpresionRegular
             LlenaTablaPosiciones();
             GeneraSiguientePos();
             respalda(arbol, respaldo);
-            respalda(automata, respaldoAut);
             GeneraAutomata();
             SetNiveles(automata[0], 0);
             foreach (Nodo n in automata)
@@ -98,6 +98,7 @@ namespace ExpresionRegular
                 n.centro = new Point(0, 0);
             }
             GeneraPosicionesAutomata(automata[0]);
+            respalda(automata, respaldoAut);
             SizeBmp(ref w, ref h, automata);
             bmpA = new Bitmap(w, h);
             PintaAutomata();
@@ -363,7 +364,7 @@ namespace ExpresionRegular
             }
             else
             {
-                if (font.Size - 1 > 0)
+                if (font.Size - 1 > 0 && fontpos.Size - 1 > 0)
                 {
                     font = new Font("Arial", font.Size - 1, FontStyle.Bold);
                     fontpos = new Font("Arial", fontpos.Size - 1, FontStyle.Bold);
@@ -455,10 +456,16 @@ namespace ExpresionRegular
                
         private void Simulacion_Tick(object sender, EventArgs e)
         {
+            Nodo nd = new Nodo();
+            Arista a = new Arista();
             if (contV < nodosV.Count)
             {
                 if (autVerif.Count == contV)
                 {
+                    /*nd = new Nodo(nodosV[contV].name);
+                    nd.nivel = nodosV[contV].nivel;
+                    nd.centro = nodosV[contV].centro;
+                    nd.terminal = nodosV[contV].terminal;*/
                     autVerif.Add(nodosV[contV]);
                 }
                 else
@@ -471,6 +478,10 @@ namespace ExpresionRegular
             else
             {
                 foreach(Nodo n in nodosV)
+                {
+                    n.aristas.Clear();
+                }
+                foreach (Nodo n in autVerif)
                 {
                     n.aristas.Clear();
                 }
@@ -593,9 +604,6 @@ namespace ExpresionRegular
         {
             if(!VerificaTick)
             {
-                Simulacion.Interval = 100;
-                Simulacion.Enabled = true;
-                Simulacion.Start();
                 VerificaTick = true;
                 inicio = DateTime.Now;
             }
@@ -603,33 +611,39 @@ namespace ExpresionRegular
             {
                 VerificaTick = false;
                 contV = 0;
+                foreach(Nodo n in autVerif)
+                {
+                    n.aristas.Clear();
+                }
                 autVerif.Clear();
+
                 foreach(Nodo n in nodosV)
                 {
                     n.aristas.Clear();
                 }
+                nodosV.Clear();
+                AristasV.Clear();
             }
         }
 
-        private void Timer1_Tick(object sender, EventArgs e)
+        private void TextVer_TextChanged(object sender, EventArgs e)
         {
-            if (contV < nodosV.Count)
+            Simular.Enabled = false;
+            Simular.Visible = false;
+            VerRes.Visible = false;
+            VerificaTick = false;
+            contV = 0;
+            foreach (Nodo n in autVerif)
             {
-                if (autVerif.Count == contV)
-                {
-                    autVerif.Add(nodosV[contV]);
-                }
-                else
-                {
-                    autVerif.Last().aristas.Add(AristasV[contV]);
-                    contV++;
-                }
+                n.aristas.Clear();
             }
-            else
+            autVerif.Clear();
+            foreach (Nodo n in nodosV)
             {
-                autVerif.Clear();
-                contV = 0;
+                n.aristas.Clear();
             }
+            nodosV.Clear();
+            AristasV.Clear();
         }
 
         private void pictureAutomata_Paint(object sender, PaintEventArgs e)
@@ -680,10 +694,15 @@ namespace ExpresionRegular
                 }
                 foreach (Nodo n in autVerif)
                 {
-                    if(n.terminal)
+                    if (n.terminal && nodosV.Last().Equals(n))
                         gA.FillEllipse(brushVerFinal, n.centro.X - n.radio, n.centro.Y - n.radio, n.radio * 2, n.radio * 2);
                     else
-                        gA.FillEllipse(brushVer, n.centro.X - n.radio, n.centro.Y - n.radio, n.radio * 2, n.radio * 2);
+                    {
+                        if(n.aristas.Count == 0)
+                            gA.FillEllipse(new SolidBrush(Color.DeepSkyBlue), n.centro.X - n.radio, n.centro.Y - n.radio, n.radio * 2, n.radio * 2);
+                        else
+                            gA.FillEllipse(brushVer, n.centro.X - n.radio, n.centro.Y - n.radio, n.radio * 2, n.radio * 2);
+                    }
                     gA.DrawEllipse(Pen, n.centro.X - n.radio, n.centro.Y - n.radio, n.radio * 2, n.radio * 2);
                     if (n.terminal)
                         gA.DrawEllipse(Pen, n.centro.X - n.radio + 3, n.centro.Y - n.radio + 3, n.radio * 2 - 6, n.radio * 2 - 6);
@@ -692,21 +711,30 @@ namespace ExpresionRegular
 
                     foreach (Arista a in n.aristas)
                     {
-                        if (a.destino.Equals(n))
+                        if (a.destino.name == n.name)
                         {
-                            gA.DrawBezier(penV, n.centro.X - (n.radio / 3 * 2), n.centro.Y - (n.radio / 3 * 2), n.centro.X - (n.radio), n.centro.Y - (n.radio * 2 + 5), n.centro.X + n.radio, n.centro.Y - (n.radio * 2 + 2), n.centro.X + (n.radio / 3 * 2), n.centro.Y - (n.radio / 3 * 2));
+                            if(autVerif.Last().Equals(n))
+                                gA.DrawBezier(penVF, n.centro.X - (n.radio / 3 * 2), n.centro.Y - (n.radio / 3 * 2), n.centro.X - (n.radio), n.centro.Y - (n.radio * 2 + 5), n.centro.X + n.radio, n.centro.Y - (n.radio * 2 + 2), n.centro.X + (n.radio / 3 * 2), n.centro.Y - (n.radio / 3 * 2));
+                            else
+                                gA.DrawBezier(penV, n.centro.X - (n.radio / 3 * 2), n.centro.Y - (n.radio / 3 * 2), n.centro.X - (n.radio), n.centro.Y - (n.radio * 2 + 5), n.centro.X + n.radio, n.centro.Y - (n.radio * 2 + 2), n.centro.X + (n.radio / 3 * 2), n.centro.Y - (n.radio / 3 * 2));
                             gA.DrawString(a.nombre, fontA, brushVer, n.centro.X, n.centro.Y - (n.radio * 3));
                         }
                         else
                         {
                             if (n.nivel + 1 == a.destino.nivel)
                             {
-                                gA.DrawLine(penV, BuscaInterseccion(n.centro, a.destino.centro, n.radio), BuscaInterseccion(a.destino.centro, n.centro, n.radio));
+                                if (autVerif.Last().Equals(n))
+                                    gA.DrawLine(penVF, BuscaInterseccion(n.centro, a.destino.centro, n.radio), BuscaInterseccion(a.destino.centro, n.centro, n.radio));
+                                else
+                                    gA.DrawLine(penV, BuscaInterseccion(n.centro, a.destino.centro, n.radio), BuscaInterseccion(a.destino.centro, n.centro, n.radio));
                                 gA.DrawString(a.nombre, fontA, brushVer, (n.centro.X + a.destino.centro.X) / 2 - 8, (n.centro.Y + a.destino.centro.Y) / 2 - 15);
                             }
                             else
                             {
-                                bz = new Bezier(BuscaInterseccion(a.destino.centro, n.centro, n.radio), BuscaInterseccion(n.centro, a.destino.centro, n.radio), gA, penV, false, a.nombre, false, true);
+                                if (autVerif.Last().Equals(n))
+                                    bz = new Bezier(BuscaInterseccion(a.destino.centro, n.centro, n.radio), BuscaInterseccion(n.centro, a.destino.centro, n.radio), gA, penVF, false, a.nombre, false, true);
+                                else
+                                    bz = new Bezier(BuscaInterseccion(a.destino.centro, n.centro, n.radio), BuscaInterseccion(n.centro, a.destino.centro, n.radio), gA, penV, false, a.nombre, false, true);
                             }
                         }
                     }
@@ -746,6 +774,13 @@ namespace ExpresionRegular
 
         private void Validar_Click(object sender, EventArgs e)
         {
+            VerificaTick = false;
+            foreach (Nodo n in nodosV)
+                n.aristas.Clear();
+            nodosV.Clear();
+            AristasV.Clear();
+            autVerif.Clear();
+            contV = 0;
             Arista ar = new Arista();
             Nodo EdoActual = new Nodo();
             Nodo nod = new Nodo();
@@ -753,6 +788,9 @@ namespace ExpresionRegular
             EdoActual = automata[0];
             nod = new Nodo(EdoActual.name);
             nod.centro = EdoActual.centro;
+            nod.radio = EdoActual.radio;
+            nod.nivel = EdoActual.nivel;
+            nod.terminal = EdoActual.terminal;
             nodosV.Add(nod);
             string w = "";
             w = TextVer.Text;
@@ -771,6 +809,7 @@ namespace ExpresionRegular
                             nod.centro = EdoActual.centro;
                             nod.nivel = EdoActual.nivel;
                             nod.terminal = EdoActual.terminal;
+                            nod.radio = EdoActual.radio;
                             ar = new Arista();
                             ar.nombre = a.nombre;
                             ar.destino = nod;
@@ -784,6 +823,7 @@ namespace ExpresionRegular
                 }
                 if(contW == w.Length && EdoActual.terminal)
                 {
+                    VerRes.Visible = true;
                     VerRes.Text = "Aceptada";
                     VerRes.BackColor = Color.Green;
                     wVerificada = true;
@@ -792,6 +832,7 @@ namespace ExpresionRegular
                 }
                 else
                 {
+                    VerRes.Visible = true;
                     VerRes.Text = "Error";
                     VerRes.BackColor = Color.Red;
                     wVerificada = false;
@@ -895,7 +936,7 @@ namespace ExpresionRegular
 
         private void respalda(Arbol a, List<Point> respaldo)
         {
-            foreach(Nodo n in arbol)
+            foreach(Nodo n in a)
             {
                 Point p = new Point(n.centro.X, n.centro.Y);
                 respaldo.Add(p);
@@ -904,10 +945,10 @@ namespace ExpresionRegular
 
         private void obten(Arbol a, List<Point> respaldo)
         {
-            for (int i = 0; i < arbol.Count(); i++)
+            for (int i = 0; i < a.Count(); i++)
             {
-                arbol[i].centro = respaldo[i];
-                arbol[i].radio = 15;
+                a[i].centro = respaldo[i];
+                a[i].radio = 15;
             }
             font = new Font("Arial", 12, FontStyle.Bold);
             fontpos = new Font("Arial", 10, FontStyle.Bold);

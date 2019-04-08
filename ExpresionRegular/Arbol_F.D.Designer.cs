@@ -355,6 +355,7 @@
             this.TextVer.Name = "TextVer";
             this.TextVer.Size = new System.Drawing.Size(368, 20);
             this.TextVer.TabIndex = 9;
+            this.TextVer.TextChanged += new System.EventHandler(this.TextVer_TextChanged);
             // 
             // Validar
             // 
@@ -405,10 +406,6 @@
             this.Simular.UseVisualStyleBackColor = true;
             this.Simular.Visible = false;
             this.Simular.Click += new System.EventHandler(this.Simular_Click);
-            // 
-            // Timer1
-            // 
-            this.Timer1.Tick += new System.EventHandler(this.Timer1_Tick);
             // 
             // Arbol_F
             // 

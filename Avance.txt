@@ -104,6 +104,12 @@ Rev.
 	Hacer el Examen: Primero y Siguiente.
 	**********************************************
 --------------
+04 de abril de 2019
+Avance:
+	Examen primero y siguiente
+	Corregido: Zoom y simulación
+Rev.
+	
 
 	
 
